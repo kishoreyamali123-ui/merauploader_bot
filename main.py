@@ -646,13 +646,15 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
             
             elif "webvideos.classplusapp." in url:
-               cmd = f'yt-dlp --add-header "referer:https://web.classplusapp.com/" --add-header "x-cdn-tag:empty" -f "{ytf}" "{url}" -o "{name}.mp4"'
+                    cmd = f'yt-dlp --add-header "referer:https://web.classplusapp.com/" --add-header "x-cdn-tag:empty" -f "{ytf}" "{url}" -o "{name}.mp4"'
+            elif ".m3u8" in url:
+                    cmd = f'yt-dlp --hls-prefer-ffmpeg -f "{ytf}" "{url}" -o "{name}.mp4"'
           
             elif "youtube.com" in url or "youtu.be" in url:
-                cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
+                    cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
           
             else:
-                cmd = f'yt-dlp --hls-prefer-ffmpeg -f "{ytf}" "{url}" -o "{name}.mp4" -R 25 --fragment-retries 25'
+                cmd = f'yt-dlp --no-check-certificate --hls-prefer-ffmpeg -f "{ytf}" "{url}" -o "{name}.mp4" -R 25 --fragment-retries 25'
 
             try:  
                 cc = f'**[🎬] 𝗩𝗶𝗱_𝗜𝗱 : {str(count).zfill(3)}.\n\n☘️𝗧𝗶𝘁𝗹𝗲 𝗡𝗮𝗺𝗲 ➤ {name1}.({res}).𝔗𝔲𝔰𝔥𝔞𝔯.mkv\n\n📚𝗕𝗮𝘁𝗰𝗵 𝗡𝗮𝗺𝗲 ➤ {b_name}\n\n📥 𝗘𝘅𝘁𝗿𝗮𝗰𝘁𝗲𝗱 𝗕𝘆 ➤  {CR}**'
@@ -801,7 +803,7 @@ async def upload(bot: Client, m: Message):
                         await asyncio.sleep(e.x)
                         continue
                 else:
-                    emoji_message = await show_random_emojis(message)
+                    emoji_message = await show_random_emojis(m)
                     remaining_links = len(links) - count
                     Show = f"**🍁 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗜𝗡𝗚 🍁**\n\n**📝ɴᴀᴍᴇ » ** `{name}\n\n🔗ᴛᴏᴛᴀʟ ᴜʀʟ » {len(links)}\n\n🗂️ɪɴᴅᴇx » {str(count)}/{len(links)}\n\n🌐ʀᴇᴍᴀɪɴɪɴɢ ᴜʀʟ » {remaining_links}\n\n❄ǫᴜᴀʟɪᴛʏ » {res}`\n\n**🔗ᴜʀʟ » ** `{url}`\n\n🤖𝗕𝗢𝗧 𝗠𝗔𝗗𝗘 𝗕𝗬 ➤ 𝗧𝗨𝗦𝗛𝗔𝗥"
                     prog = await m.reply_text(Show)
