@@ -192,7 +192,7 @@ async def help_command(client: Client, msg: Message):
 # Upload command handler
 @bot.on_message(filters.command(["tushar2","upload2"]))
 async def upload(bot: Client, m: Message):
-    if not is_authorized(m.chat.id):
+    if not is_authorized(m.from_user.id):
         await m.reply_text("**🚫You are not authorized to use this bot.**")
         return
     
@@ -308,7 +308,7 @@ async def upload(bot: Client, m: Message):
     input4: Message = await bot.listen(editable.chat.id)
     raw_text4 = input4.text
     await input4.delete(True)
-    if raw_text4 == 3:
+    if raw_text4 == "3":
         MR = token
     else:
         MR = raw_text4
