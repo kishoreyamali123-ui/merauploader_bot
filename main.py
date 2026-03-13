@@ -54,13 +54,13 @@ async def show_random_emojis(message):
     return emoji_message
     
 # Define the owner's user ID
-OWNER_ID = 844458456 # Replace with the actual owner's user ID
+OWNER_ID = 8429501123 # Replace with the actual owner's user ID
 
 # List of sudo users (initially empty or pre-populated)
-SUDO_USERS = [844458456]
+SUDO_USERS = [8429501123]
 
 # ✅ Multiple AUTH CHANNELS allowed
-AUTH_CHANNELS = [-1003298832164,-1002663510614]  # Add more channel IDs here
+AUTH_CHANNELS = [-1003642874957,-1002663510614]  # Add more channel IDs here
 
 # Function to check if a user is authorized
 def is_authorized(user_id: int) -> bool:
@@ -538,7 +538,7 @@ async def upload(bot: Client, m: Message):
     raw_text4 = input4.text
     await input4.delete(True)
     if raw_text4 == "3":
-        MR = token
+        MR = ""
     else:
         MR = raw_text4
 
