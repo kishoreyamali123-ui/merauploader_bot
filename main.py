@@ -436,7 +436,12 @@ async def upload(bot: Client, m: Message):
         return
 
     editable = await m.reply_text(f"⚡𝗦𝗘𝗡𝗗 𝗧𝗫𝗧 𝗙𝗜𝗟𝗘⚡")
-    input: Message = await bot.listen(editable.chat.id)
+    while True:
+        input: Message = await bot.listen(editable.chat.id)
+        if input.document:
+            break
+        else:
+            await m.reply_text("❌ Please send a TXT file.")
     x = await input.download()
     await input.delete(True)
     file_name, ext = os.path.splitext(os.path.basename(x))
