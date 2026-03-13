@@ -714,7 +714,7 @@ async def upload(bot: Client, m: Message):
                         #count +=1
                     #except Exception as e:
                         #await m.reply_text(str(e))    
-                        #time.sleep(1)    
+                        #await asyncio.sleep(1)    
                         #continue
                 
                 #elif "youtu" in url:
@@ -723,7 +723,7 @@ async def upload(bot: Client, m: Message):
                         #count +=1
                     #except Exception as e:
                         #await m.reply_text(str(e))    
-                        #time.sleep(1)    
+                        #await asyncio.sleep(1)    
                         #continue
 
                 elif "media-cdn.classplusapp.com/drm/" in url:
@@ -732,7 +732,7 @@ async def upload(bot: Client, m: Message):
                         count +=1
                     except Exception as e:
                         await m.reply_text(str(e))    
-                        time.sleep(1)    
+                        await asyncio.sleep(1)    
                         continue          
                         
                 
@@ -811,7 +811,7 @@ async def upload(bot: Client, m: Message):
                     await emoji_message.delete()
                     await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
                     count += 1
-                    time.sleep(1)
+                    await asyncio.sleep(1)
 
             except Exception as e:
                 await m.reply_text(f'‼️𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗶𝗻𝗴 𝗙𝗮𝗶𝗹𝗲𝗱‼️\n\n'
