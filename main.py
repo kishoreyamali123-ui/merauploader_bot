@@ -652,7 +652,7 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
           
             else:
-                cmd = f'yt-dlp --hls-prefer-ffmpeg -f "{ytf}" "{url}" -o "{name}.mp4"'
+                cmd = f'yt-dlp --hls-prefer-ffmpeg -f "{ytf}" "{url}" -o "{name}.mp4" -R 25 --fragment-retries 25'
 
             try:  
                 cc = f'**[🎬] 𝗩𝗶𝗱_𝗜𝗱 : {str(count).zfill(3)}.\n\n☘️𝗧𝗶𝘁𝗹𝗲 𝗡𝗮𝗺𝗲 ➤ {name1}.({res}).𝔗𝔲𝔰𝔥𝔞𝔯.mkv\n\n📚𝗕𝗮𝘁𝗰𝗵 𝗡𝗮𝗺𝗲 ➤ {b_name}\n\n📥 𝗘𝘅𝘁𝗿𝗮𝗰𝘁𝗲𝗱 𝗕𝘆 ➤  {CR}**'
@@ -778,7 +778,7 @@ async def upload(bot: Client, m: Message):
                     try:
                         cmd = f'yt-dlp -o "{name}.zip" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                        os.system(download_cmd)
+                        subprocess.run(download_cmd, shell=True, timeout=1800)
                         copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.zip', caption=cczip)
                         count += 1
                         os.remove(f'{name}.zip')
