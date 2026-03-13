@@ -204,8 +204,8 @@ async def cookies_handler(client: Client, m: Message):
         await m.reply_text(f"⚠️ An error occurred: {str(e)}")
 
 # Define paths for uploaded file and processed file
-UPLOAD_FOLDER = '/path/to/upload/folder'
-EDITED_FILE_PATH = '/path/to/save/edited_output.txt'
+UPLOAD_FOLDER = "downloads"
+os.makedirs(UPLOAD_FOLDER, exist_ok = True)
 
 @bot.on_message(filters.command('e2t'))
 async def edit_txt(client, message: Message):
@@ -431,7 +431,7 @@ async def help_command(client: Client, msg: Message):
 # Upload command handler
 @bot.on_message(filters.command(["tushar"]))
 async def upload(bot: Client, m: Message):
-    if not is_authorized(m.chat.id):
+    if not is_authorized(m.from_user.id):
         await m.reply_text("**🚫You are not authorized to use this bot.**")
         return
 
@@ -550,7 +550,7 @@ async def upload(bot: Client, m: Message):
     await input6.delete(True)
     await editable.delete()
 
-    thumb = input6.text
+    thumb = raw_text6
     if thumb.startswith("http://") or thumb.startswith("https://"):
         getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
         thumb = "thumb.jpg"
@@ -580,10 +580,10 @@ async def upload(bot: Client, m: Message):
                     url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9'}).json()['url']                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             elif "tencdn.classplusapp" in url or "media-cdn-alisg.classplusapp.com" in url or "videos.classplusapp" in url or "media-cdn.classplusapp" in url:
-             headers = {'Host': 'api.classplusapp.com', 'x-access-token': 'eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9', 'user-agent': 'Mobile-Android', 'app-version': '1.4.37.1', 'api-version': '18', 'device-id': '5d0d17ac8b3c9f51', 'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30', 'accept-encoding': 'gzip'}
-             params = (('url', f'{url}'),)
-             response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-             url = response.json()['url']
+                    headers = {'Host': 'api.classplusapp.com', 'x-access-token': 'eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9', 'user-agent': 'Mobile-Android', 'app-version': '1.4.37.1', 'api-version': '18', 'device-id': '5d0d17ac8b3c9f51', 'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30', 'accept-encoding': 'gzip'}
+                    params = (('url', f'{url}'),)
+                    response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
+                    url = response.json()['url']
 
             elif "https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/" in url:
                 url = url.replace("https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/", "")
@@ -669,10 +669,10 @@ async def upload(bot: Client, m: Message):
                         copy = await bot.send_document(chat_id=m.chat.id,document=ka, caption=cc1)
                         count+=1
                         os.remove(ka)
-                        time.sleep(1)
+                        await asyncio.sleep(1)
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        time.sleep(e.x)
+                        await asyncio.sleep(e.x)
                         continue
 
                 elif ".pdf" in url:
@@ -705,7 +705,7 @@ async def upload(bot: Client, m: Message):
 
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        time.sleep(e.x)
+                        await asyncio.sleep(e.x)
                         continue
                         
                 #elif "muftukmall" in url:
@@ -784,7 +784,7 @@ async def upload(bot: Client, m: Message):
                         os.remove(f'{name}.zip')
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        time.sleep(e.x)
+                        await asyncio.sleep(e.x)
                         count += 1
                         continue
                         
@@ -798,7 +798,7 @@ async def upload(bot: Client, m: Message):
                         os.remove(f'{name}.pdf')
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        time.sleep(e.x)
+                        await asyncio.sleep(e.x)
                         continue
                 else:
                     emoji_message = await show_random_emojis(message)
